@@ -5,14 +5,12 @@ from sqlmodel import create_engine, Session, select
 from .routes import main_bp, auth_bp
 from passlib.hash import bcrypt
 
-
 def create_app(database_url: str | None = None) -> Flask:
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'change-me'
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///eqms.db'
     engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     SQLModel.metadata.create_all(engine)
-
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
@@ -40,4 +38,3 @@ def create_app(database_url: str | None = None) -> Flask:
             session.commit()
 
     return app
-
