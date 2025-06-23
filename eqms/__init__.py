@@ -31,7 +31,11 @@ def create_app(database_url: str | None = None) -> Flask:
         stmt = select(User).where(User.username == 'admin')
         admin = session.exec(stmt).first()
         if not admin:
-            admin = User(username='admin', password_hash=bcrypt.hash('admin'), role='admin')
+            admin = User(
+                username='admin',
+                password_hash=bcrypt.hash('admin'),
+                role='admin'
+            )
             session.add(admin)
             session.commit()
 
