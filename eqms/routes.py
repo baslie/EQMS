@@ -36,6 +36,7 @@ def logout():
 
 @main_bp.route('/')
 @login_required
+
 def index():
     with get_session(current_app.engine) as session:
         buildings = session.exec(select(Building)).all()
