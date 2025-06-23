@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Список объектов</h1>
+<form hx-post="/buildings" hx-swap="beforeend" hx-include="this" hx-target="#buildings" class="mb-4">
+  <input type="text" name="name" placeholder="Название здания" class="border p-2 mr-2">
+  <button class="bg-blue-600 text-white px-4 py-2">Добавить</button>
+</form>
+<ul id="buildings">
+  {% for b in buildings %}
+  <li class="mb-1">{{ b.name }}</li>
+  {% else %}
+  <li class="text-gray-500">Нет объектов</li>
+  {% endfor %}
+</ul>
+{% endblock %}
