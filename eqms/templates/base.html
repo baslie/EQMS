@@ -10,8 +10,16 @@
   </head>
   <body class="bg-gray-100 text-gray-900">
     <nav class="bg-blue-800 text-white p-4 mb-4">
-      <div class="container mx-auto">
+      <div class="container mx-auto flex justify-between items-center">
         <span class="font-bold">Elevator Quality Monitoring System</span>
+        <div>
+          {% if current_user.is_authenticated %}
+            <span class="mr-4">{{ current_user.username }} ({{ current_user.role }})</span>
+            <a href="{{ url_for('auth.logout') }}" class="underline">Выход</a>
+          {% else %}
+            <a href="{{ url_for('auth.login') }}" class="underline">Войти</a>
+          {% endif %}
+        </div>
       </div>
     </nav>
     <div class="container mx-auto p-4">
