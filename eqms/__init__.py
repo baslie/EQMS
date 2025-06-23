@@ -11,7 +11,6 @@ def create_app(database_url: str | None = None) -> Flask:
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url or 'sqlite:///eqms.db'
     engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
     SQLModel.metadata.create_all(engine)
-    
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)

@@ -1,1 +1,1 @@
-<li class="mb-1">{{ building.name }}</li>
+<li class="mb-1"><a href="{{ url_for('main.building_detail', building_id=building.id) }}">{{ building.name }}</a></li>
