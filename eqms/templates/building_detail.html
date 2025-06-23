@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class="mb-4">
+    {% for category, message in messages %}
+      <li class="text-red-600">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1 class="text-2xl font-bold mb-4">{{ building.name }}</h1>
+{% if current_user.role == 'admin' %}
+<form hx-post="/buildings/{{ building.id }}/entrances" hx-target="#entrances" hx-swap="beforeend" hx-include="this" class="mb-4">
+  <input type="text" name="name" placeholder="Название подъезда" class="border p-2 mr-2">
+  <button class="bg-blue-600 text-white px-4 py-2">Добавить подъезд</button>
+</form>
+{% endif %}
+<ul id="entrances">
+  {% for e in entrances %}
+    <li class="mb-1"><a href="{{ url_for('main.entrance_detail', entrance_id=e.id) }}">{{ e.name }}</a></li>
+  {% else %}
+    <li class="text-gray-500">Нет подъездов</li>
+  {% endfor %}
+</ul>
+{% endblock %}
